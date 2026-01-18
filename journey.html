@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Our Journey 📖</title>
+<style>
+  body { background: #fff0f5; font-family: 'Segoe UI', sans-serif; margin: 0; color: #b30059; text-align: center; }
+  header { padding: 80px 20px; background: linear-gradient(to bottom, #ffdde1, #fff0f5); }
+  h1 { font-size: 3.5rem; margin: 0; }
+  .timeline { max-width: 700px; margin: 40px auto; padding: 20px; }
+  .moment { 
+    background: white; padding: 30px; border-radius: 30px; margin-bottom: 60px; 
+    box-shadow: 0 15px 35px rgba(255, 77, 136, 0.1); animation: fadeInUp 1.5s ease backwards;
+  }
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  .moment img, .moment video { width: 100%; border-radius: 20px; margin-bottom: 15px; }
+  .date { font-weight: bold; color: #ff4d88; display: block; margin-bottom: 5px; }
+  
+  .to-be-continued {
+    font-size: 2rem;
+    font-style: italic;
+    margin: 80px 0 150px 0;
+    opacity: 0.8;
+  }
+
+  .home-fab { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background: #ff4d88; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 1.5rem; box-shadow: 0 10px 20px rgba(0,0,0,0.1); z-index: 1000; transition: 0.3s; }
+</style>
+</head>
+<body>
+  <audio id="journeyMusic" loop><source src="journey-intro.mp3" type="audio/mpeg"></audio>
+
+  <header>
+    <h1>Our Journey Together ❤️</h1>
+    <p>Every memory with you is a treasure...</p>
+  </header>
+
+  <div class="timeline">
+    <div class="moment" style="animation-delay: 0.2s;">
+      <span class="date">Laxmi Pooja</span>
+      <img src="photo1.jpg" alt="Memory 1">
+      <p>"Tihar Vibes"</p>
+    </div>
+
+    <div class="moment" style="animation-delay: 0.5s;">
+      <span class="date">FAVORITE MOMENT</span>
+      <video autoplay muted loop playsinline>
+        <source src="video1.mp4" type="video/mp4">
+      </video>
+      <p>"I could watch this on repeat forever."</p>
+    </div>
+
+    <div class="moment" style="animation-delay: 0.8s;">
+      <span class="date">Our Hands/span>
+      <img src="photo2.jpg" alt="Memory 2">
+      <p>"Still my favorite person. Always & forever."</p>
+    </div>
+  </div>
+
+  <div class="to-be-continued">
+    Made With Love By Lashata Shakya ❤️
+  </div>
+
+  <a href="valentine.html" class="home-fab">🏠</a>
+
+  <script>
+    const journeyMusic = document.getElementById('journeyMusic');
+    window.addEventListener('load', () => {
+      const savedTime = localStorage.getItem('journeyMusicTime');
+      if (savedTime) { journeyMusic.currentTime = parseFloat(savedTime); }
+      
+      journeyMusic.volume = 0;
+      journeyMusic.play().then(() => {
+        let fadeIn = setInterval(() => {
+          if (journeyMusic.volume < 0.9) { journeyMusic.volume += 0.1; } else { clearInterval(fadeIn); }
+        }, 150);
+      }).catch(() => {
+        window.addEventListener('scroll', () => { journeyMusic.play(); }, { once: true });
+      });
+      localStorage.removeItem('journeyMusicTime');
+    });
+  </script>
+</body>
+</html>

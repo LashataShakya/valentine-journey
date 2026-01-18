@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Top Secret 🔒</title>
+<style>
+  body {
+    background: #121212;
+    color: #ff4d88;
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    text-align: center;
+  }
+  .login-card {
+    background: #1e1e1e;
+    padding: 40px;
+    border-radius: 30px;
+    border: 2px solid #ff4d88;
+    box-shadow: 0 0 20px rgba(255, 77, 136, 0.3);
+  }
+  h1 { font-size: 2rem; margin-bottom: 20px; }
+  input {
+    background: #2c2c2c;
+    border: 2px solid #ff4d88;
+    padding: 15px;
+    border-radius: 15px;
+    color: white;
+    font-size: 1.2rem;
+    width: 250px;
+    text-align: center;
+    outline: none;
+  }
+  button {
+    margin-top: 20px;
+    background: #ff4d88;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 15px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  #error { color: #ff1a1a; margin-top: 15px; display: none; font-weight: bold; }
+</style>
+</head>
+<body>
+
+<div class="login-card">
+  <h1>Restricted Access 🔐</h1>
+  <p>Enter the password, Babe Cha:</p>
+  <input type="password" id="passInput" placeholder="Password...">
+  <br>
+  <button id="unlockBtn">Unlock Surprise ✨</button>
+  <div id="error">Incorrect password! 🥺</div>
+</div>
+
+<script>
+  const passInput = document.getElementById('passInput');
+  const error = document.getElementById('error');
+  const unlockBtn = document.getElementById('unlockBtn');
+
+  function checkPass() {
+    const pass = passInput.value.trim(); // Removes accidental spaces
+    
+    // The password is babecha123
+    if (pass.toLowerCase() === "babecha123") {
+      // Direct redirect
+      window.location.href = "valentine.html";
+    } else {
+      error.style.display = 'block';
+      passInput.value = '';
+      passInput.focus();
+    }
+  }
+
+  unlockBtn.addEventListener('click', checkPass);
+
+  passInput.addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+      checkPass();
+    }
+  });
+</script>
+
+</body>
+</html>

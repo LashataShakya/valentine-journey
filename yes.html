@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Yes! 💘</title>
+<style>
+  body { 
+    background: linear-gradient(-45deg, #ffdde1, #ee9ca7, #ffc1cc, #ffafbd);
+    background-size: 400% 400%;
+    animation: gradientBG 3s ease infinite;
+    font-family: 'Segoe UI', sans-serif; 
+    color: #b30059; 
+    text-align: center; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    height: 100vh; 
+    margin: 0; 
+    overflow: hidden; 
+  }
+  @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+
+  #mainWrapper { transition: filter 2s ease; height: 100%; display: flex; flex-direction: column; justify-content: center; }
+  h1 { font-size: 5rem; text-shadow: 2px 2px white; margin: 0; }
+  p { font-size: 2rem; font-weight: bold; }
+
+  #overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(255, 192, 203, 0.4);
+    backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+    display: none; justify-content: center; align-items: center;
+    z-index: 1000; opacity: 0; transition: opacity 2s ease;
+  }
+
+  #journeyBtn {
+    padding: 30px 60px; font-size: 2.5rem; background: #ff4d88; color: white;
+    border: none; border-radius: 80px; cursor: pointer; font-weight: bold;
+    text-decoration: none; box-shadow: 0 0 50px rgba(255, 77, 136, 0.8);
+    transition: 0.3s; animation: pulseGlow 2s infinite;
+  }
+  @keyframes pulseGlow { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+
+  .heart { position: fixed; bottom: -150px; animation: floatUp 4s linear forwards; pointer-events: none; }
+  @keyframes floatUp { 0% { transform: translateY(0); opacity: 0; } 20% { opacity: 1; } 100% { transform: translateY(-110vh); opacity: 0; } }
+</style>
+</head>
+<body onclick="startMusic()">
+
+  <audio id="celebrationMusic" preload="auto" loop><source src="yes-music.mp3" type="audio/mpeg"></audio>
+  <audio id="journeyIntroMusic" preload="auto" loop><source src="journey-intro.mp3" type="audio/mpeg"></audio>
+
+  <div id="mainWrapper">
+    <h1>YAYYYY! 💘</h1>
+    <p>I knew it. Thankyou so much for being my valentines this year. <br>
+See you again next year.🥰<br>Also, <br> Happy Valentine’s Day, Babe.<br> Also Thankyou so much for everything. ❤️</p>
+  </div>
+
+  <div id="overlay">
+    <a href="journey.html" id="journeyBtn">SEE OUR JOURNEY ✨</a>
+  </div>
+
+  <script>
+    const celebrationMusic = document.getElementById('celebrationMusic');
+    const journeyMusic = document.getElementById('journeyIntroMusic');
+    let musicStarted = false;
+
+    function startMusic() { if (!musicStarted) { celebrationMusic.play(); musicStarted = true; } }
+
+    setInterval(() => {
+      const heart = document.createElement("div"); heart.className = "heart";
+      heart.innerHTML = "❤️"; heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = (Math.random() * 40 + 40) + "px";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 4000);
+    }, 200);
+
+    setTimeout(() => {
+      const wrapper = document.getElementById('mainWrapper');
+      const overlay = document.getElementById('overlay');
+      wrapper.style.filter = "blur(20px)";
+      
+      let fadeOut = setInterval(() => {
+        if (celebrationMusic.volume > 0.1) { celebrationMusic.volume -= 0.1; } 
+        else {
+          celebrationMusic.pause(); clearInterval(fadeOut);
+          setTimeout(() => {
+            overlay.style.display = "flex";
+            setTimeout(() => { overlay.style.opacity = "1"; }, 50);
+            journeyMusic.volume = 0; journeyMusic.play();
+            let fadeIn = setInterval(() => {
+              if (journeyMusic.volume < 0.9) { journeyMusic.volume += 0.1; } else { clearInterval(fadeIn); }
+            }, 200);
+          }, 3000); 
+        }
+      }, 150);
+    }, 8000);
+
+    document.getElementById('journeyBtn').addEventListener('click', () => {
+      localStorage.setItem('journeyMusicTime', journeyMusic.currentTime);
+    });
+  </script>
+</body>
+</html>

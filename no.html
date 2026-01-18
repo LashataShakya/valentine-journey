@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>NO😢</title>
+<style>
+  body { background: linear-gradient(to bottom, #2c2c2c, #121212); font-family: 'Segoe UI', sans-serif; color: #f8e6e6; text-align: center; display: flex; flex-direction: column; justify-content: center; height: 100vh; margin: 0; overflow: hidden; }
+  h1 { font-size: 4rem; color: #ff4d88; z-index: 10; }
+  .btn-home { background-color: #ff4d88; color: white; padding: 25px 60px; font-size: 1.8rem; text-decoration: none; border-radius: 60px; font-weight: bold; box-shadow: 0 0 30px #ff4d88; transition: 0.3s; display: inline-block; z-index: 10; }
+  .sad-emoji { position: fixed; top: -150px; animation: fallDown 5s linear forwards; }
+  @keyframes fallDown { 0% { transform: translateY(0) rotate(0deg); opacity: 0; } 20% { opacity: 0.7; } 100% { transform: translateY(110vh) rotate(-180deg) scale(1.5); opacity: 0; } }
+</style>
+</head>
+<body>
+  <audio autoplay loop><source src="no-music.mp3" type="audio/mpeg"></audio>
+  <h1>Why did you say no?? 
+<br>You don't love me anymore??😢</h1>
+  <p style="font-size: 1.8rem; z-index: 10;">Please say yes, Babe 💔</p>
+  <div><a href="valentine.html?retry=true" class="btn-home">GO TO HOME & FIX THIS 💘</a></div>
+  <script>
+    setInterval(() => {
+      const sad = document.createElement("div"); sad.className = "sad-emoji";
+      sad.innerHTML = ["💔", "🥺", "😢", "🥀", "🌧️"][Math.floor(Math.random() * 5)];
+      sad.style.left = Math.random() * 100 + "vw";
+      sad.style.fontSize = (Math.random() * 40 + 70) + "px";
+      document.body.appendChild(sad);
+      setTimeout(() => sad.remove(), 5000);
+    }, 150);
+  </script>
+</body>
+</html>
